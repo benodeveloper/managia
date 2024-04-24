@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This a simple app </title>
+</head>
+<body>
+    
+    <h2>list of missions</h2>
+    <p>This is a list of missions</p>
+    <table>
+        <thead>
+            <td>ID</td>
+            <td>REFERENCE</td>
+            <td>ORDER NUMBER</td>
+        </thead>
+        <tbody>
+            {% for mission in missions %}
+            <tr>
+                <td>{{mission.id}}</td>
+                <td>{{mission.reference}}</td>
+                <td>{{mission.order_number}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <h2>Add new mission</h2>
+    <p>Misson's form</p>
+    <form action="/missions/create" method="post">
+        {% csrf_token %}
+        <label for="reference"> Reference</label>
+        <input type="text" id="reference" name="reference">
+
+        <label for="order_number"> Order Number</label>
+        <input type="text" id="order_number" name="order_number">
+        <button type="submit"> Submit</button>
+    </form>
+</body>
+</html>
