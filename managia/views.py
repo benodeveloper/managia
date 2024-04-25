@@ -1,3 +1,6 @@
 
+from django.http import HttpResponse
+
+
 def index(request):
-    return "NOT OUN"
+    return HttpResponse("Hello, world!")
