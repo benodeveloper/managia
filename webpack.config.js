@@ -1,6 +1,8 @@
 const path = require('path')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
+const { BuildOutputPlugin } = require('@laravel-mix/webpack-build-output')
+const CopyPlugin = require("copy-webpack-plugin");
 
 /** 
  * {@link https://github.com/webpack/webpack/discussions/14280}
@@ -51,8 +53,17 @@ module.exports = [
             new IgnoreEmitPlugin(/css\.js$/),
             new IgnoreEmitPlugin(/images\.js$/),
             new IgnoreEmitPlugin(/js\.js$/),
-
+            new BuildOutputPlugin(),
+            // node_modules/flowbite/dist/flowbite.min.js
+            new CopyPlugin({
+                patterns: [
+                  { from: "node_modules/flowbite/dist/flowbite.min.js", to: "js/flowbite.min.js" },
+                ],
+              }),
         ],
+        stats: {
+            preset: 'errors-warnings',
+          },
         resolve: {
             extensions: [".js"],
         },
